@@ -1,0 +1,25 @@
+name: "Use composite action"
+description: "Use composite action to build and test the project"
+on:
+  workflow_dispatch:
+    inputs:
+        node-version:
+            description: "Node.js version to use."
+            required: true
+            default: "20.x"
+        working-dir:
+            description: "The working directory of the application."
+            required: false
+            default: "."
+
+
+jobs:
+  cache-and-dependencies:
+    name: "Cache Node and NPM Dependencies"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Cache Node and NPM Dependencies"
+        uses: ./.github/actions/composite-cache-deps
+        with:
+          node-version: ${{ github.event.inputs.node-version }}
+          working-dir: ${{ github.event.inputs.working-dir }}
