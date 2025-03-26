@@ -18,6 +18,8 @@ jobs:
     name: "Cache Node and NPM Dependencies"
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
       - name: "Cache Node and NPM Dependencies"
         uses: ./.github/actions/composite-cache-deps
         with:
